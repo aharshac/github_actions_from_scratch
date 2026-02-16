@@ -1,0 +1,3 @@
+/home/runner/work/github_actions_from_scratch/github_actions_from_scratch/_codeql_build_dir/CMakeFiles/hello_world.dir
+/home/runner/work/github_actions_from_scratch/github_actions_from_scratch/_codeql_build_dir/CMakeFiles/edit_cache.dir
+/home/runner/work/github_actions_from_scratch/github_actions_from_scratch/_codeql_build_dir/CMakeFiles/rebuild_cache.dir
