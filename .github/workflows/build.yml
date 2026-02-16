@@ -24,11 +24,10 @@ jobs:
     - name: Build
       run: cmake --build build
     
-    - name: Run application
-      run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          ./build/Debug/hello_world.exe
-        else
-          ./build/hello_world
-        fi
-      shell: bash
+    - name: Run application (Linux)
+      if: runner.os == 'Linux'
+      run: ./build/hello_world
+    
+    - name: Run application (Windows)
+      if: runner.os == 'Windows'
+      run: .\build\Debug\hello_world.exe
