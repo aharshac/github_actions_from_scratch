@@ -1,0 +1,34 @@
+name: Build and Run C++ App
+
+on:
+  push:
+    branches: [ main, copilot/** ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Configure CMake
+      run: cmake -B build -S .
+    
+    - name: Build
+      run: cmake --build build
+    
+    - name: Run application
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          ./build/Debug/hello_world.exe
+        else
+          ./build/hello_world
+        fi
+      shell: bash
