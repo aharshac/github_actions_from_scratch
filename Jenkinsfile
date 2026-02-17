@@ -35,9 +35,14 @@ pipeline {
         stage('Square Number') {
             steps {
                 script {
-                    def result = sh(script: "./square.sh ${params.NUMBER_TO_SQUARE}", returnStdout: true).trim()
-                    echo "Input: ${params.NUMBER_TO_SQUARE}"
-                    echo "Square: ${result}"
+                    // Validate parameter is a number before passing to script
+                    if (params.NUMBER_TO_SQUARE ==~ /^-?\d+$/) {
+                        def result = sh(script: "./square.sh ${params.NUMBER_TO_SQUARE}", returnStdout: true).trim()
+                        echo "Input: ${params.NUMBER_TO_SQUARE}"
+                        echo "Square: ${result}"
+                    } else {
+                        error "Invalid input: NUMBER_TO_SQUARE must be a valid integer"
+                    }
                 }
             }
         }
