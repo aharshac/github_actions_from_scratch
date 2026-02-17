@@ -3,6 +3,10 @@ pipeline {
         label 'linux'
     }
     
+    parameters {
+        string(name: 'NUMBER_TO_SQUARE', defaultValue: '5', description: 'Enter a number to square')
+    }
+    
     stages {
         stage('Checkout') {
             steps {
@@ -25,6 +29,16 @@ pipeline {
         stage('Run Application') {
             steps {
                 sh './build/hello_world'
+            }
+        }
+        
+        stage('Square Number') {
+            steps {
+                script {
+                    def result = sh(script: "./square.sh ${params.NUMBER_TO_SQUARE}", returnStdout: true).trim()
+                    echo "Input: ${params.NUMBER_TO_SQUARE}"
+                    echo "Square: ${result}"
+                }
             }
         }
     }
